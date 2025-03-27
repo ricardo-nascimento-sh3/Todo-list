@@ -22,7 +22,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #264666;
+  background-color: #124868;
   color: #fff;
   padding: 1rem;
   display: flex;
@@ -42,6 +42,7 @@ nav a {
   text-decoration: none;
   color: #ecf0f1;
   font-weight: bold;
+  font-size: large;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: background 0.3s ease;

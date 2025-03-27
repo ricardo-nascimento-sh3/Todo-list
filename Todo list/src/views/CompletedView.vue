@@ -31,8 +31,12 @@ export default {
   },
   methods: {
     deleteCompletedTask(index) {
-      this.completedTasks.splice(index, 1) // Remove do array
-      localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks)) // Atualiza o armazenamento
+      // Adicionando confirmação antes de deletar
+      const confirmed = window.confirm('Você tem certeza de que deseja excluir esta tarefa concluída?');
+      if (confirmed) {
+        this.completedTasks.splice(index, 1) // Remove do array
+        localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks)) // Atualiza o armazenamento
+      }
     }
   }
 }
@@ -40,7 +44,7 @@ export default {
 
 <style scoped>
 div {
-  margin-top: 13%;
+  margin-top: 16%;
   margin-left: 310px;
   display: block;
   flex-direction: column;
@@ -62,7 +66,7 @@ table {
 
 th, td {
   padding: 15px;
-  text-align: left;
+  text-align: ce;
   border-bottom: 1px solid #e1e1e1; /* Linha de separação suave */
 }
 
@@ -94,26 +98,12 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
   transition: 0.3s ease;
   font-weight: 600;
 }
 
 button:nth-child(1) {
   background-color: #DC3545;
-  color: #fff;
-}
-
-button:nth-child(2) {
-  background-color: #ffc107;
-  color: #333;
-}
-
-button:nth-child(3) {
-  background-color: #28a745;
   color: #fff;
 }
 
@@ -129,6 +119,16 @@ button svg {
 h1{
   color: rgb(182, 161, 161);
   text-align: center;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+td{
+  width: 500px; /* Ajuste conforme necessário */
+  word-wrap: break-word; /* Quebra palavras longas para evitar overflow */
+  word-break: break-all;
 }
 
 </style>

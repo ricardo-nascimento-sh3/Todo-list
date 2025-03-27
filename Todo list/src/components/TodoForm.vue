@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="addTask">
-    <input v-model="newTask" placeholder="Nova tarefa" required />
-    <input v-model="newDescription" placeholder="Descrição" />
+    <input v-model="newTask" placeholder="Nova tarefa"  maxlength="30" required />
+    <input v-model="newDescription" placeholder="Descrição" maxlength="100" />
     <button type="submit">Adicionar</button>
   </form>
 </template>
