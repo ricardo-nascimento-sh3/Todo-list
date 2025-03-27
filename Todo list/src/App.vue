@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
 
     <nav>
-      <RouterLink to="/">📌 Pendentes</RouterLink>
+      <RouterLink to="/">📌 Pendentes </RouterLink>
       <RouterLink to="/completed">✅ Completas</RouterLink>
     </nav>
   </header>
@@ -20,13 +20,13 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-/* Header fixo com fundo estilizado */
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #2c3e50;
+  background-color: #264666;
   color: #fff;
   padding: 1rem;
   display: flex;
@@ -35,22 +35,11 @@ header {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo e título alinhados */
-.logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  margin-right: 10px;
-}
-
-/* Navegação centralizada */
 nav {
   display: flex;
-  justify-content: center; /* Centraliza os itens de navegação */
-  gap: 1rem; /* Espaçamento entre os links */
-  flex-grow: 1; /* Faz o nav crescer e ocupar o espaço disponível */
+  justify-content: center;
+  gap: 1rem;
+  flex-grow: 1;
 }
 
 nav a {
@@ -62,14 +51,8 @@ nav a {
   transition: background 0.3s ease;
 }
 
-nav a.router-link-exact-active {
-  background-color: #3498db;
-  color: #fff;
-}
-
-/* Layout principal */
 main {
-  margin-top: 100px; /* Para não ficar atrás do header */
+  margin-top: 100px;
   padding: 2rem;
   max-width: 600px;
   margin-left: auto;

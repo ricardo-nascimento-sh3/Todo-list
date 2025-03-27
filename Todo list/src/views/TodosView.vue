@@ -1,38 +1,50 @@
 <template>
-    <div>
-      <h1>Tarefas Pendentes</h1>
-      <TodoForm @add-task="addTask" />
-      <TodoList :tasks="tasks" @complete-task="completeTask" />
-    </div>
-  </template>
-  
-  <script>
-  import TodoForm from '../components/TodoForm.vue'
-  import TodoList from '../components/TodoList.vue'
-  
-  export default {
-    components: { TodoForm, TodoList },
-    data() {
-      return {
-        tasks: JSON.parse(localStorage.getItem('tasks')) || []
-      }
+  <div>
+    <h1>Tarefas Pendentes</h1>
+    <TodoForm @add-task="addTask" />
+    <TodoList 
+      :tasks="tasks" 
+      @complete-task="completeTask" 
+      @edit-task="editTask" 
+      @delete-task="deleteTask" 
+    />
+  </div>
+</template>
+
+<script>
+import TodoForm from '../components/TodoForm.vue'
+import TodoList from '../components/TodoList.vue'
+
+export default {
+  components: { TodoForm, TodoList },
+  data() {
+    return {
+      tasks: JSON.parse(localStorage.getItem('tasks')) || []
+    }
+  },
+  methods: {
+    addTask(task) {
+      this.tasks.push(task)
+      this.saveTasks()
     },
-    methods: {
-      addTask(task) {
-        this.tasks.push(task)
-        this.saveTasks()
-      },
-      completeTask(index) {
-        const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || []
-        completedTasks.push(this.tasks[index])
-        this.tasks.splice(index, 1)
-        localStorage.setItem('completedTasks', JSON.stringify(completedTasks))
-        this.saveTasks()
-      },
-      saveTasks() {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks))
-      }
+    completeTask(index) {
+      const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || []
+      completedTasks.push(this.tasks[index])
+      this.tasks.splice(index, 1)
+      localStorage.setItem('completedTasks', JSON.stringify(completedTasks))
+      this.saveTasks()
+    },
+    editTask(index, newTask) {
+      this.tasks[index] = newTask
+      this.saveTasks()
+    },
+    deleteTask(index) {
+      this.tasks.splice(index, 1)
+      this.saveTasks()
+    },
+    saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
     }
   }
-  </script>
-  
+}
+</script>
