@@ -1,34 +1,35 @@
-# Todo List
+# Todo list
 
-Este é um projeto de uma **Lista de Tarefas** simples, onde você pode adicionar, editar, excluir e marcar tarefas como concluídas. É uma aplicação prática para gestão de tarefas diárias.
+This template should help get you started developing with Vue 3 in Vite.
 
-## Funcionalidades
+## Recommended IDE Setup
 
-- **Adicionar Tarefa**: Permite criar uma nova tarefa.
-- **Editar Tarefa**: Você pode editar o nome ou a descrição das tarefas.
-- **Excluir Tarefa**: Exclua tarefas que não são mais necessárias.
-- **Concluir Tarefa**: Marque uma tarefa como concluída.
-- **Interface Responsiva**: A aplicação se adapta bem a diferentes tamanhos de tela.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Tecnologias Utilizadas
+## Customize configuration
 
-- **Vue.js**: Para construção da interface reativa.
-- **CSS**: Para estilização e layout da aplicação.
+See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Como Executar
+## Project Setup
 
-Clone o repositório:
-   
-> git clone https://github.com/ricardo-nascimento-sh3/Todo-list.git
+```sh
+npm install
+```
 
-Instale as dependências:
+### Compile and Hot-Reload for Development
 
-   > npm install
+```sh
+npm run dev
+```
 
-Inicie o servidor local:
+### Compile and Minify for Production
 
-   > npm run dev
+```sh
+npm run build
+```
 
-## Site
+### Lint with [ESLint](https://eslint.org/)
 
-https://todo-list-mu-gold-54.vercel.app
+```sh
+npm run lint
+```
