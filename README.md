@@ -28,3 +28,7 @@ Instale as dependências:
 Inicie o servidor local:
 
    > npm run dev
+
+## Site
+
+https://todo-list-mu-gold-54.vercel.app
