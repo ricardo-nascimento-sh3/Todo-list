@@ -17,14 +17,14 @@ Este é um projeto de uma **Lista de Tarefas** simples, onde você pode adiciona
 
 ## Como Executar
 
-1. Clone o repositório:
+Clone o repositório:
    
-   git clone https://github.com/ricardo-nascimento-sh3/Todo-list.git
+> git clone https://github.com/ricardo-nascimento-sh3/Todo-list.git
 
 Instale as dependências:
 
-   npm install
+   > npm install
 
 Inicie o servidor local:
 
-   npm run dev
+   > npm run dev
