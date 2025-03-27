@@ -4,10 +4,6 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <div class="logo-container">
-      <h1>Todo List</h1>
-    </div>
-
     <nav>
       <RouterLink to="/">📌 Pendentes </RouterLink>
       <RouterLink to="/completed">✅ Completas</RouterLink>
@@ -51,11 +47,9 @@ nav a {
   transition: background 0.3s ease;
 }
 
-main {
-  margin-top: 100px;
-  padding: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+nav a:hover, nav a.router-link-exact-active {
+  background: #1b344a;
 }
+
+
 </style>

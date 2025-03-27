@@ -23,8 +23,10 @@ export default {
     }
   },
   methods: {
-    addTask(task) {
-      this.tasks.push(task)
+    // Método atualizado para lidar com a tarefa e descrição
+    addTask(taskData) {
+      // Adiciona a tarefa com descrição
+      this.tasks.push({ task: taskData.task, description: taskData.description })
       this.saveTasks()
     },
     completeTask(index) {
@@ -48,3 +50,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+div {
+  margin-top: 12%;
+  margin-left: 220px;
+  display: block;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+h1{
+  color: rgb(182, 161, 161);
+  text-align: center;
+}
+
+</style>
+
