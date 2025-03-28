@@ -54,29 +54,28 @@ export default {
   },
   
   computed: {
-    filteredTasks() {
-      // Filtra as tarefas com base na data selecionada e no texto da busca
-      return this.tasks.filter(task => {
-        const searchLower = this.searchQuery.toLowerCase()
-        const selectedDate = this.selectedDate
-        const taskDate = task.date
-
-         // Se "Mostrar Todas" estiver ativado, ignora a filtragem por data
-         if (this.showAllTasks) {
-          return (
-            task.task.toLowerCase().includes(searchLower) ||
-            task.description.toLowerCase().includes(searchLower)
-          );
-        }
-
-
+  filteredTasks() {
+    // Filtra as tarefas com base na data selecionada e no texto da busca
+    return this.tasks.filter(task => {
+      const searchLower = this.searchQuery.toLowerCase();
+      const taskDate = task.date;
+      
+      // Se "Mostrar Todas" estiver ativado, ignora a filtragem por data
+      if (this.showAllTasks) {
         return (
-          (taskDate === selectedDate) && 
-          (task.task.toLowerCase().includes(searchLower) || task.description.toLowerCase().includes(searchLower))
-        )
-      })
-    }
-  },
+          task.task.toLowerCase().includes(searchLower) ||
+          task.description.toLowerCase().includes(searchLower)
+        );
+      }
+
+      // Verifique se a tarefa corresponde à data selecionada e ao termo de busca
+      return (
+        (taskDate === this.selectedDate) && 
+        (task.task.toLowerCase().includes(searchLower) || task.description.toLowerCase().includes(searchLower))
+      );
+    });
+  }
+},
   methods: {
     toggleShowAllTasks() {
       this.showAllTasks = !this.showAllTasks;

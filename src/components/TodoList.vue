@@ -37,9 +37,9 @@
             <button @click="cancelEdit" class="cancel-btn">❌ Cancelar</button>
           </template>
           <template v-else>
-            <button @click="$emit('complete-task', index)" class="complete-btn">✅ Concluído</button>
+            <button @click="completeTask(index)" class="complete-btn">✅ Concluído</button>
             <button @click="startEdit(index, task)" class="edit-btn">✏️ Editar</button>
-            <button @click="$emit('delete-task', index)" class="delete-btn">🗑️ Excluir</button>
+            <button @click="confirmDelete(index)" class="delete-btn">🗑️ Excluir</button>
           </template>
         </td>
       </tr>
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default {
   props: ['tasks'],
   data() {
@@ -70,16 +72,74 @@ export default {
           description: this.editedDescription
         });
         this.editingIndex = null;
+        this.showSuccessToast('Tarefa editada com sucesso!');
       }
     },
     cancelEdit() {
       this.editingIndex = null;
+    },
+    completeTask(index) {
+      this.$emit('complete-task', index);
+      this.showSuccessToast('Tarefa concluída com sucesso!');
+    },
+    confirmDelete(index) {
+      Swal.fire({
+        title: 'Tem certeza que deseja excluir essa tarefa?',
+        text: 'Essa ação não poderá ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true,
+        customClass: {
+          container: 'swal-container-center'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit('delete-task', index);
+          this.showSuccessToast('Tarefa excluída com sucesso!');
+        }
+      });
+    },
+    
+    showSuccessToast(message) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: message,
+        showConfirmButton: false,
+        timer: 2000,
+        toast: true, // Deixa o balão de notificação como toast
+        background: '#28a745', // Cor verde
+        color: '#fff', // Texto branco
+        customClass: {
+          container: 'toast-container',
+        }
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+/* Estilos gerais */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Centralizando a caixa de confirmação */
+.swal-container-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+}
+
+/* Melhorando os inputs de edição */
 .edit-input {
   width: 100%;
   padding: 10px;
@@ -97,6 +157,7 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
 }
 
+/* Estilizando a tabela */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -127,6 +188,7 @@ td {
   line-height: 1.5;
 }
 
+/* Melhorando os botões */
 button {
   padding: 8px 12px;
   border-radius: 5px;
@@ -149,7 +211,7 @@ button {
 }
 
 .complete-btn {
-  background-color: #28a745;;
+  background-color: #28a745;
   color: #fff;
 }
 
@@ -172,8 +234,8 @@ td:last-child {
   width: 350px;
 }
 
-td{
-  word-wrap: break-word;
+td {
+  word-wrap: break-word; /* Quebra palavras longas para evitar overflow */
   word-break: break-all;
 }
 

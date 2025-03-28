@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default {
   data() {
     return {
@@ -35,23 +37,67 @@ export default {
   },
   methods: {
     deleteCompletedTask(index) {
-      const confirmed = window.confirm('Você tem certeza de que deseja excluir esta tarefa concluída?')
-      if (confirmed) {
-        this.completedTasks.splice(index, 1)
-        localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks))
-      }
+      // SweetAlert2 para confirmação de exclusão
+      Swal.fire({
+        title: 'Você tem certeza que deseja excluir essa tarefa?',
+        text: 'Essa ação não pode ser desfeita.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true,
+        background: '#fff',
+        customClass: {
+          confirmButton: 'confirm-btn',
+          cancelButton: 'cancel-btn',
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Excluir a tarefa do array
+          this.completedTasks.splice(index, 1);
+          // Atualizar o localStorage
+          localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks));
+          // Mostrar notificação de sucesso
+          this.showSuccessToast('Tarefa excluída com sucesso!');
+        }
+      });
     },
     formatDate(dateString) {
-      if (!dateString) return ''
-      const date = new Date(dateString)
-      return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) // Formato DD/MM/AAAA
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+    },
+    showSuccessToast(message) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: message,
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        background: '#28a745',
+        color: '#fff',
+        customClass: {
+          container: 'toast-container',
+        }
+      });
     }
   }
 }
 </script>
 
-
 <style scoped>
+/* Estilos do botão de confirmação do SweetAlert2 */
+.confirm-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 div {
   margin-top: 12%;
   margin-left: 235px;
