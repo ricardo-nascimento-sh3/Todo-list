@@ -40,9 +40,9 @@ Este é um projeto de **Todo List** desenvolvido utilizando **Vue.js**. Ele perm
 
    O projeto estará disponível em `http://localhost:5173/` (ou a porta exibida no terminal).
 
-## 📜 Site
+## 🌐 Demonstração
 
-https://todo-list-rho-two-13.vercel.app
+Acesse o projeto online em: [Todo List - Vercel](https://todo-list-rho-two-13.vercel.app)
 
 ---
 Desenvolvido por [Ricardo Nascimento](https://github.com/ricardo-nascimento-sh3) 🚀
