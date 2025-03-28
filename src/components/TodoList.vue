@@ -80,7 +80,6 @@ export default {
 </script>
 
 <style scoped>
-/* Melhorando os inputs de edição */
 .edit-input {
   width: 100%;
   padding: 10px;
@@ -98,7 +97,6 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
 }
 
-/* Estilizando a tabela */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -129,7 +127,6 @@ td {
   line-height: 1.5;
 }
 
-/* Melhorando os botões */
 button {
   padding: 8px 12px;
   border-radius: 5px;
@@ -176,7 +173,7 @@ td:last-child {
 }
 
 td{
-  word-wrap: break-word; /* Quebra palavras longas para evitar overflow */
+  word-wrap: break-word;
   word-break: break-all;
 }
 

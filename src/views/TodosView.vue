@@ -23,9 +23,8 @@ export default {
     }
   },
   methods: {
-    // Método atualizado para lidar com a tarefa e descrição
     addTask(taskData) {
-      // Adiciona a tarefa com descrição
+
       this.tasks.push({ task: taskData.task, description: taskData.description })
       this.saveTasks()
     },

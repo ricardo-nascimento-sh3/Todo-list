@@ -10,16 +10,14 @@
 export default {
   data() {
     return {
-      newTask: '',        // Variável para a tarefa
-      newDescription: ''  // Variável para a descrição
+      newTask: '',        
+      newDescription: ''  
     }
   },
   methods: {
     addTask() {
       if (this.newTask.trim()) {
-        // Emitir a tarefa e a descrição para o componente pai
         this.$emit('add-task', { task: this.newTask.trim(), description: this.newDescription.trim() })
-        // Limpar os campos após adicionar
         this.newTask = ''
         this.newDescription = ''
       }
@@ -33,7 +31,7 @@ form {
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-bottom: 20px; /* Adiciona espaço abaixo do formulário */
+  margin-bottom: 20px;
 }
 
 input {
