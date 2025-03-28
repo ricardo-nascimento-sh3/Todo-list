@@ -64,5 +64,4 @@ nav a:hover, nav a.router-link-exact-active {
   background: #1b344a;
 }
 
-
 </style>
