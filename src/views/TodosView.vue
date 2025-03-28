@@ -1,9 +1,18 @@
 <template>
   <div>
     <h1>Tarefas Pendentes</h1>
+
+    <input
+      v-model="searchQuery"
+      type="text"
+      placeholder="Buscar por tarefa ou descrição..."
+      class="search-input"
+    />
+
     <TodoForm @add-task="addTask" />
+
     <TodoList 
-      :tasks="tasks" 
+      :tasks="filteredTasks" 
       @complete-task="completeTask" 
       @edit-task="editTask" 
       @delete-task="deleteTask" 
@@ -19,29 +28,60 @@ export default {
   components: { TodoForm, TodoList },
   data() {
     return {
-      tasks: JSON.parse(localStorage.getItem('tasks')) || []
+      tasks: JSON.parse(localStorage.getItem('tasks')) || [],
+      searchQuery: '', // Variável para armazenar a busca
+    }
+  },
+  
+  computed: {
+    filteredTasks() {
+      // Filtra as tarefas com base na palavra-chave da busca
+      return this.tasks.filter(task => {
+        const searchLower = this.searchQuery.toLowerCase()
+        return (
+          task.task.toLowerCase().includes(searchLower) || 
+          task.description.toLowerCase().includes(searchLower)
+        )
+      })
     }
   },
   methods: {
     addTask(taskData) {
-
       this.tasks.push({ task: taskData.task, description: taskData.description })
       this.saveTasks()
     },
-    completeTask(index) {
-      const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || []
-      completedTasks.push(this.tasks[index])
-      this.tasks.splice(index, 1)
-      localStorage.setItem('completedTasks', JSON.stringify(completedTasks))
-      this.saveTasks()
+    completeTask(filteredIndex) {
+      // Encontra o índice da tarefa na lista original (tasks)
+      const taskToComplete = this.filteredTasks[filteredIndex]
+      const index = this.tasks.indexOf(taskToComplete)
+      
+      if (index !== -1) {
+        const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || []
+        completedTasks.push(this.tasks[index])
+        this.tasks.splice(index, 1)
+        localStorage.setItem('completedTasks', JSON.stringify(completedTasks))
+        this.saveTasks()
+      }
     },
-    editTask(index, newTask) {
-      this.tasks[index] = newTask
-      this.saveTasks()
+    editTask(filteredIndex, newTask) {
+      // Encontra o índice da tarefa na lista original (tasks)
+      const taskToEdit = this.filteredTasks[filteredIndex]
+      const index = this.tasks.indexOf(taskToEdit)
+      
+      if (index !== -1) {
+        this.tasks[index] = newTask
+        this.saveTasks()
+      }
     },
-    deleteTask(index) {
-      this.tasks.splice(index, 1)
-      this.saveTasks()
+    deleteTask(filteredIndex) {
+      // Encontra o índice da tarefa na lista original (tasks)
+      const taskToDelete = this.filteredTasks[filteredIndex]
+      const index = this.tasks.indexOf(taskToDelete)
+      
+      if (index !== -1) {
+        this.tasks.splice(index, 1)
+        this.saveTasks()
+      }
     },
     saveTasks() {
       localStorage.setItem('tasks', JSON.stringify(this.tasks))
@@ -60,10 +100,19 @@ div {
   width: 100%;
 }
 
-h1{
+h1 {
   color: rgb(182, 161, 161);
   text-align: center;
 }
 
-</style>
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
 
+</style>

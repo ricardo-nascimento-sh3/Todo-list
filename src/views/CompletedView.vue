@@ -65,7 +65,6 @@ table {
 
 th, td {
   padding: 15px;
-  text-align: ce;
   border-bottom: 1px solid #e1e1e1;
 }
 
