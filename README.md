@@ -1,35 +1,48 @@
-# Todo list
+# Todo List
 
-This template should help get you started developing with Vue 3 in Vite.
+Este é um projeto de **Todo List** desenvolvido utilizando **Vue.js**. Ele permite adicionar, remover e marcar tarefas como concluídas de forma simples e intuitiva.
 
-## Recommended IDE Setup
+## 🚀 Tecnologias Utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [Vue.js](https://vuejs.org/) - Framework JavaScript progressivo
+- HTML5 e CSS3 - Estrutura e estilização da aplicação
+- JavaScript - Lógica da aplicação
 
-## Customize configuration
+## 📌 Funcionalidades
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+✅ Adicionar novas tarefas
+✅ Remover tarefas
+✅ Marcar tarefas como concluídas
+✅ Interface dinâmica e reativa com Vue.js
 
-## Project Setup
+## ▶️ Como Rodar o Projeto
 
-```sh
-npm install
-```
+1. **Clone o repositório:**
 
-### Compile and Hot-Reload for Development
+   ```sh
+   git clone https://github.com/ricardo-nascimento-sh3/Todo-list.git
+   cd Todo-list
+   ```
 
-```sh
-npm run dev
-```
+2. **Instale as dependências:**
 
-### Compile and Minify for Production
+   ```sh
+   npm install
+   ```
 
-```sh
-npm run build
-```
+3. **Execute o projeto:**
 
-### Lint with [ESLint](https://eslint.org/)
+   ```sh
+   npm run dev
+   ```
 
-```sh
-npm run lint
-```
+4. **Acesse no navegador:**
+
+   O projeto estará disponível em `http://localhost:5173/` (ou a porta exibida no terminal).
+
+## 📜 Site
+
+https://todo-list-rho-two-13.vercel.app
+
+---
+Desenvolvido por [Ricardo Nascimento](https://github.com/ricardo-nascimento-sh3) 🚀
