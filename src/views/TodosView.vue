@@ -29,13 +29,12 @@ export default {
   data() {
     return {
       tasks: JSON.parse(localStorage.getItem('tasks')) || [],
-      searchQuery: '', // Variável para armazenar a busca
+      searchQuery: '',
     }
   },
   
   computed: {
     filteredTasks() {
-      // Filtra as tarefas com base na palavra-chave da busca
       return this.tasks.filter(task => {
         const searchLower = this.searchQuery.toLowerCase()
         return (
@@ -51,7 +50,6 @@ export default {
       this.saveTasks()
     },
     completeTask(filteredIndex) {
-      // Encontra o índice da tarefa na lista original (tasks)
       const taskToComplete = this.filteredTasks[filteredIndex]
       const index = this.tasks.indexOf(taskToComplete)
       
@@ -64,7 +62,6 @@ export default {
       }
     },
     editTask(filteredIndex, newTask) {
-      // Encontra o índice da tarefa na lista original (tasks)
       const taskToEdit = this.filteredTasks[filteredIndex]
       const index = this.tasks.indexOf(taskToEdit)
       
@@ -74,7 +71,6 @@ export default {
       }
     },
     deleteTask(filteredIndex) {
-      // Encontra o índice da tarefa na lista original (tasks)
       const taskToDelete = this.filteredTasks[filteredIndex]
       const index = this.tasks.indexOf(taskToDelete)
       
