@@ -6,6 +6,8 @@
         <tr>
           <th>Tarefa</th>
           <th>Descrição</th>
+          <th>Data de Criação</th>
+          <th>Data de Conclusão</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -13,6 +15,8 @@
         <tr v-for="(task, index) in completedTasks" :key="index">
           <td>{{ task.task }}</td>
           <td>{{ task.description }}</td>
+          <td>{{ formatDate(task.date) }}</td> 
+          <td>{{ formatDate(task.completedAt) }}</td>
           <td>
             <button @click="deleteCompletedTask(index)">🗑️ Excluir</button>
           </td>
@@ -31,21 +35,26 @@ export default {
   },
   methods: {
     deleteCompletedTask(index) {
-    
-      const confirmed = window.confirm('Você tem certeza de que deseja excluir esta tarefa concluída?');
+      const confirmed = window.confirm('Você tem certeza de que deseja excluir esta tarefa concluída?')
       if (confirmed) {
         this.completedTasks.splice(index, 1)
         localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks))
       }
+    },
+    formatDate(dateString) {
+      if (!dateString) return ''
+      const date = new Date(dateString)
+      return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) // Formato DD/MM/AAAA
     }
   }
 }
 </script>
 
+
 <style scoped>
 div {
-  margin-top: 16%;
-  margin-left: 310px;
+  margin-top: 12%;
+  margin-left: 235px;
   display: block;
   flex-direction: column;
   height: 100vh;
@@ -115,6 +124,8 @@ h1{
   text-align: center;
 }
 
+td:nth-child(3),
+td:nth-child(4),
 td:last-child {
   text-align: center;
 }
