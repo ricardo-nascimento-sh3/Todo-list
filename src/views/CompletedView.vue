@@ -1,6 +1,8 @@
 <template>
   <div>
+    
     <h1>Tarefas Concluídas</h1>
+
     <table>
       <thead>
         <tr>
@@ -11,7 +13,9 @@
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
+
         <tr v-for="(task, index) in completedTasks" :key="index">
           <td>{{ task.task }}</td>
           <td>{{ task.description }}</td>
@@ -21,6 +25,7 @@
             <button @click="deleteCompletedTask(index)">🗑️ Excluir</button>
           </td>
         </tr>
+
       </tbody>
     </table>
   </div>
@@ -37,27 +42,23 @@ export default {
   },
   methods: {
     deleteCompletedTask(index) {
-      // SweetAlert2 para confirmação de exclusão
       Swal.fire({
-        title: 'Você tem certeza que deseja excluir essa tarefa?',
-        text: 'Essa ação não pode ser desfeita.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim, excluir!',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true,
-        background: '#fff',
-        customClass: {
-          confirmButton: 'confirm-btn',
-          cancelButton: 'cancel-btn',
-        }
+      title: 'Você tem certeza que deseja excluir essa tarefa?',
+      text: 'Essa ação não pode ser desfeita.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      background: '#fff',
+      customClass: {
+        confirmButton: 'confirm-btn',
+        cancelButton: 'cancel-btn',
+      }
       }).then((result) => {
         if (result.isConfirmed) {
-          // Excluir a tarefa do array
           this.completedTasks.splice(index, 1);
-          // Atualizar o localStorage
           localStorage.setItem('completedTasks', JSON.stringify(this.completedTasks));
-          // Mostrar notificação de sucesso
           this.showSuccessToast('Tarefa excluída com sucesso!');
         }
       });
@@ -87,7 +88,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos do botão de confirmação do SweetAlert2 */
 .confirm-btn {
   background-color: #28a745;
   color: #fff;

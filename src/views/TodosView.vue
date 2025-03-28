@@ -2,7 +2,6 @@
   <div>
     <h1>Tarefas Pendentes</h1>
 
-    <!-- Campo de seleção de data -->
     <input
       type="date"
       v-model="selectedDate"
@@ -14,7 +13,6 @@
       {{ showAllTasks ? "Mostrar por Data" : "Mostrar Todos Registros" }}
     </button>
 
-    <!-- Campo de busca -->
     <input
       v-model="searchQuery"
       type="text"
@@ -22,13 +20,8 @@
       class="search-input"
     />
 
-    <!-- Botão para mostrar todas as tarefas -->
-
-
-    <!-- Formulário de Tarefa -->
     <TodoForm @add-task="addTask" />
 
-    <!-- Lista de Tarefas -->
     <TodoList 
       :tasks="filteredTasks" 
       @complete-task="completeTask" 
@@ -47,20 +40,18 @@ export default {
   data() {
     return {
       tasks: JSON.parse(localStorage.getItem('tasks')) || [],
-      searchQuery: '', // Variável para armazenar a busca
-      selectedDate: new Date().toISOString().split('T')[0], // Data selecionada no formato 'yyyy-mm-dd'
-      showAllTasks: false, // Controle do botão "Mostrar Todas"
+      searchQuery: '',
+      selectedDate: new Date().toISOString().split('T')[0],
+      showAllTasks: false,
     }
   },
   
   computed: {
   filteredTasks() {
-    // Filtra as tarefas com base na data selecionada e no texto da busca
     return this.tasks.filter(task => {
       const searchLower = this.searchQuery.toLowerCase();
       const taskDate = task.date;
-      
-      // Se "Mostrar Todas" estiver ativado, ignora a filtragem por data
+    
       if (this.showAllTasks) {
         return (
           task.task.toLowerCase().includes(searchLower) ||
@@ -68,7 +59,6 @@ export default {
         );
       }
 
-      // Verifique se a tarefa corresponde à data selecionada e ao termo de busca
       return (
         (taskDate === this.selectedDate) && 
         (task.task.toLowerCase().includes(searchLower) || task.description.toLowerCase().includes(searchLower))
@@ -84,16 +74,18 @@ export default {
       const taskWithDate = { 
         task: taskData.task, 
         description: taskData.description,
-        date: this.selectedDate // Adiciona a data selecionada à tarefa
+        date: this.selectedDate
       }
+
       this.tasks.push(taskWithDate)
       this.saveTasks()
     },
     formatDate(dateString) {
       if (!dateString) return ''
       const date = new Date(dateString)
-      return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) // Formato DD/MM/AAAA
+      return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
     },
+
     completeTask(filteredIndex) {
     const taskToComplete = this.filteredTasks[filteredIndex]
     const index = this.tasks.indexOf(taskToComplete)
@@ -101,10 +93,10 @@ export default {
     if (index !== -1) {
       const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || []
 
-      // Criar uma nova entrada com a data de conclusão
+    
       const completedTask = {
         ...this.tasks[index],
-        completedAt: new Date().toISOString().split('T')[0] // Data de conclusão no formato YYYY-MM-DD
+        completedAt: new Date().toISOString().split('T')[0]
       }
 
       completedTasks.push(completedTask)
@@ -120,14 +112,15 @@ export default {
       const index = this.tasks.indexOf(taskToEdit)
 
       if (index !== -1) {
-        // Substitui a tarefa no índice correto, mantendo a mesma data
+      
         this.tasks[index] = { 
           ...newTask, 
-          date: taskToEdit.date // Garante que a data não será alterada
+          date: taskToEdit.date
         }
         this.saveTasks()
       }
     },
+
     deleteTask(filteredIndex) {
       const taskToDelete = this.filteredTasks[filteredIndex]
       const index = this.tasks.indexOf(taskToDelete)
@@ -137,6 +130,7 @@ export default {
         this.saveTasks()
       }
     },
+    
     saveTasks() {
       localStorage.setItem('tasks', JSON.stringify(this.tasks))
     }

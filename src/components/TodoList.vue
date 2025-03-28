@@ -1,14 +1,19 @@
 <template>
   <table>
+
     <thead>
+      
       <tr>
         <th>Tarefa</th>
         <th>Descrição</th>
         <th>Ações</th>
       </tr>
+
     </thead>
+
     <tbody>
       <tr v-for="(task, index) in tasks" :key="index">
+        
         <td>
           <input
             v-if="editingIndex === index"
@@ -36,14 +41,17 @@
             <button @click="saveEdit(index)" class="save-btn">💾 Salvar</button>
             <button @click="cancelEdit" class="cancel-btn">❌ Cancelar</button>
           </template>
+
           <template v-else>
             <button @click="completeTask(index)" class="complete-btn">✅ Concluído</button>
             <button @click="startEdit(index, task)" class="edit-btn">✏️ Editar</button>
             <button @click="confirmDelete(index)" class="delete-btn">🗑️ Excluir</button>
           </template>
         </td>
+        
       </tr>
     </tbody>
+
   </table>
 </template>
 
@@ -59,6 +67,7 @@ export default {
       editedDescription: ''
     };
   },
+  
   methods: {
     startEdit(index, task) {
       this.editingIndex = index;
@@ -109,9 +118,9 @@ export default {
         title: message,
         showConfirmButton: false,
         timer: 2000,
-        toast: true, // Deixa o balão de notificação como toast
-        background: '#28a745', // Cor verde
-        color: '#fff', // Texto branco
+        toast: true,
+        background: '#28a745',
+        color: '#fff',
         customClass: {
           container: 'toast-container',
         }
@@ -122,7 +131,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos gerais */
 .toast-container {
   position: fixed;
   top: 20px;
@@ -130,7 +138,6 @@ export default {
   z-index: 9999;
 }
 
-/* Centralizando a caixa de confirmação */
 .swal-container-center {
   position: fixed;
   top: 50%;
@@ -139,7 +146,6 @@ export default {
   z-index: 99999;
 }
 
-/* Melhorando os inputs de edição */
 .edit-input {
   width: 100%;
   padding: 10px;
@@ -157,7 +163,6 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
 }
 
-/* Estilizando a tabela */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -188,7 +193,6 @@ td {
   line-height: 1.5;
 }
 
-/* Melhorando os botões */
 button {
   padding: 8px 12px;
   border-radius: 5px;
@@ -235,7 +239,7 @@ td:last-child {
 }
 
 td {
-  word-wrap: break-word; /* Quebra palavras longas para evitar overflow */
+  word-wrap: break-word;
   word-break: break-all;
 }
 

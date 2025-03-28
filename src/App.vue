@@ -15,6 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterView />
     </Transition>
   </main>
+  
 </template>
 
 <style scoped>
